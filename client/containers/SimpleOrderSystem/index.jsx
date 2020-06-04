@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import styled from 'styled-components';
+import { ButtonStyle } from '../../commons/StyleComponent';
+import { SELECT_MEAL, SELECT_RESTAURANT, SELECT_DISHES, REVIEW } from '../../commons/String';
+import SelectMeal from './StepComponent/SelectMeal';
+import SelectRestaurant from './StepComponent/SelectRestaurant';
+import SelectDishes from './StepComponent/SelectDishes';
+import Review from './StepComponent/Review';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,25 +27,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Select master blaster campaign settings', 'Create an ad group', 'Create an ad'];
+  return [SELECT_MEAL, SELECT_RESTAURANT, SELECT_DISHES, REVIEW];
 }
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return 'Select campaign settings...';
+      return <SelectMeal />;
     case 1:
-      return 'What is an ad group anyways?';
+      return <SelectRestaurant />;
     case 2:
-      return 'This is the bit I really care about!';
+      return <SelectDishes />;
+    case 3:
+      return <SelectDishes />;
     default:
-      return 'Unknown stepIndex';
+      return <SelectMeal />;
   }
 }
 
-export default function HorizontalLabelPositionBelowStepper() {
+export default function SimpleOrderSystem() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -82,6 +91,7 @@ export default function HorizontalLabelPositionBelowStepper() {
               <Button variant="contained" color="primary" onClick={handleNext}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
+              <ButtonStyle>Primary Button</ButtonStyle>
             </div>
           </div>
         )}

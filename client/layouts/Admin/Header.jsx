@@ -8,6 +8,8 @@ import { MdLanguage } from 'react-icons/md';
 import { Dropdown, ButtonToolbar, DropdownButton } from "react-bootstrap";
 import i18n from '../../locale/i18n';
 import { Translation } from 'react-i18next';
+import TitleHeader from '../../commons/StyleComponent';
+import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 
 export default ({ history, toggle }) => {
   function changeLanguage(lang) {
@@ -16,15 +18,18 @@ export default ({ history, toggle }) => {
     
     link && link.click();
   }
+
   return (
     <Navbar bg="light" expand="lg">
       <Button variant="light" onClick={toggle}><FaBars fontSize="x-large" /></Button>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      {/* <Navbar.Collapse>
+        <TitleHeader><span>Simple Order System</span></TitleHeader>
+      </Navbar.Collapse> */}
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <ButtonToolbar>
             {['down'].map((direction, index) => {
-
               return (
                 <DropdownButton
                   key={index}
