@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -29,6 +29,7 @@ export default function SelectDishes() {
   const [dish, setDish] = React.useState('');
   const [openDish, setOpenDish] = React.useState(false);
   const [number, setNumber] = React.useState('');
+  const [showFields, setShowFields] = React.useState(false);
 
   const handleChangeDish = (event) => {
     setDish(event.target.value);
@@ -61,40 +62,55 @@ export default function SelectDishes() {
           <Grid item xs={3}></Grid>
         </Grid>
       </FormControl>
-      <FormControl className={classes.formControl}>
-        <Grid container spacing={3}>
-          <Grid item xs={3}></Grid>
-		  <Grid item xs={3}>
-            <Select
-              className="select-custom"
-              open={openDish}
-              onClose={handleCloseDish}
-              onOpen={handleOpenDish}
-              onChange={handleChangeDish}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {MENU && MENU.map((item, index) => (
-                <MenuItem key={index} value={item.value}>{item.name}</MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid item xs={3}>
-            <TextField
-              id="outlined-number"
-              label="Number"
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-              onChange={handleChangeNumber}
-            />
-          </Grid>
-          <Grid item xs={2}></Grid>
-        </Grid>
-      </FormControl>
+		{
+			showFields ? (
+				<FormControl className={classes.formControl}>
+					<Grid container spacing={3}>
+					<Grid item xs={3}></Grid>
+					<Grid item xs={3}>
+						<Select
+						className="select-custom"
+						open={openDish}
+						onClose={handleCloseDish}
+						onOpen={handleOpenDish}
+						onChange={handleChangeDish}
+						>
+						<MenuItem value="">
+							<em>None</em>
+						</MenuItem>
+						{MENU && MENU.map((item, index) => (
+							<MenuItem key={index} value={item.value}>{item.name}</MenuItem>
+						))}
+						</Select>
+					</Grid>
+					<Grid item xs={3}>
+						<TextField
+						id="outlined-number"
+						label="Number"
+						type="number"
+						InputLabelProps={{
+							shrink: true,
+						}}
+						variant="outlined"
+						onChange={handleChangeNumber}
+						/>
+					</Grid>
+					<Grid item xs={2}></Grid>
+					</Grid>
+				</FormControl>
+			) : (
+				<div className="div-btn-add-field">
+					<Button variant="contained" onClick={() => setShowFields(true)} className="btn-add-field">
+						Add field
+					</Button>
+				</div>
+			)
+		}
+	  <div className="block-warning">
+		  <p className="text-danger">
+		  	The total number of dishes should be greater or equal to the number of person and a maximum of 10 is allowed. So should be 5 ~ 10.
+		  </p>
+	  </div>
     </div>
   );
 }

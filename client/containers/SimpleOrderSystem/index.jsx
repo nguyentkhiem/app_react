@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { makeStyles, formatMs } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -12,6 +12,7 @@ import SelectMeal from './StepComponent/SelectMeal';
 import SelectRestaurant from './StepComponent/SelectRestaurant';
 import SelectDishes from './StepComponent/SelectDishes';
 import Review from './StepComponent/Review';
+import ModalNotify from '../../commons/Modal/ModalNotify';
 import './index.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,20 @@ function getSteps() {
   return [SELECT_MEAL, SELECT_RESTAURANT, SELECT_DISHES, REVIEW];
 }
 
+const objectDefine = {
+  meal: {
+    value: null,
+    number: 0,
+  },
+  restaurant: {
+    value: null
+  },
+  dish: {
+    value: null,
+    number: 0
+  }
+}
+
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
@@ -48,11 +63,17 @@ function getStepContent(stepIndex) {
 
 export default function SimpleOrderSystem() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(3);
+  const [activeStep, setActiveStep] = useState(2);
   const steps = getSteps();
+  const [modalShow, setModalShow] = React.useState(false);
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep < 3) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setModalShow(true);
+    }
+    
   };
 
   const handleBack = () => {
@@ -64,6 +85,7 @@ export default function SimpleOrderSystem() {
   };
 
   return (
+    <Fragment>
     <div className={classes.root}>
       <h3 className="header-simple-order"><span>Simple Order System</span></h3>
       <Stepper activeStep={activeStep} alternativeLabel>
@@ -98,6 +120,11 @@ export default function SimpleOrderSystem() {
           </div>
         )}
       </div>
+      <ModalNotify
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </div>
+    </Fragment>
   );
 }
