@@ -40,7 +40,7 @@ function getStepContent(stepIndex) {
     case 2:
       return <SelectDishes />;
     case 3:
-      return <SelectDishes />;
+      return <Review />;
     default:
       return <SelectMeal />;
   }
@@ -48,7 +48,7 @@ function getStepContent(stepIndex) {
 
 export default function SimpleOrderSystem() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(3);
   const steps = getSteps();
 
   const handleNext = () => {
