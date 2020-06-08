@@ -23,9 +23,6 @@ export default ({ history, toggle }) => {
     <Navbar bg="light" expand="lg">
       <Button variant="light" onClick={toggle}><FaBars fontSize="x-large" /></Button>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      {/* <Navbar.Collapse>
-        <TitleHeader><span>Simple Order System</span></TitleHeader>
-      </Navbar.Collapse> */}
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <ButtonToolbar>

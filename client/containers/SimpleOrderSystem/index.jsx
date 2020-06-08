@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, formatMs } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -12,6 +12,7 @@ import SelectMeal from './StepComponent/SelectMeal';
 import SelectRestaurant from './StepComponent/SelectRestaurant';
 import SelectDishes from './StepComponent/SelectDishes';
 import Review from './StepComponent/Review';
+import './index.scss';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,6 +65,7 @@ export default function SimpleOrderSystem() {
 
   return (
     <div className={classes.root}>
+      <h3 className="header-simple-order"><span>Simple Order System</span></h3>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
@@ -86,12 +88,12 @@ export default function SimpleOrderSystem() {
                 onClick={handleBack}
                 className={classes.backButton}
               >
-                Back
+                Previous
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
+              <Button className="btn-next" variant="contained" color="primary" onClick={handleNext}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
-              <ButtonStyle>Primary Button</ButtonStyle>
+              {/* <ButtonStyle>Primary Button</ButtonStyle> */}
             </div>
           </div>
         )}
