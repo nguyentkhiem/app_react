@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -25,13 +25,16 @@ const MENU = [
   {name: 'Olive Garden', value: 3},
 ]
 
-export default function SelectRestaurant() {
+export default function SelectRestaurant(props) {
   const classes = useStyles();
-  const [restaurant, setRestaurant] = React.useState('');
-  const [openRestaurant, setOpenRestaurant] = React.useState(false);
+  const [restaurant, setRestaurant] = useState('');
+  const [openRestaurant, setOpenRestaurant] = useState(false);
+  const { data, setData } = props;
 
   const handleChangeRestaurant = (event) => {
     setRestaurant(event.target.value);
+    const value = MENU.filter((item) => item.value === event.target.value)[0].name;
+    setData({...data, restaurant: {...data.restaurant, value: value}})
   };
 
   const handleCloseRestaurant = () => {
@@ -41,6 +44,10 @@ export default function SelectRestaurant() {
   const handleOpenRestaurant = () => {
     setOpenRestaurant(true);
   };
+
+  useEffect(() => {
+     
+  }, []);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,15 +24,18 @@ const MENU = [
   {name: 'Egg Muffin', value: 1},
 ]
 
-export default function SelectDishes() {
+export default function SelectDishes(props) {
   const classes = useStyles();
-  const [dish, setDish] = React.useState('');
-  const [openDish, setOpenDish] = React.useState(false);
-  const [number, setNumber] = React.useState('');
-  const [showFields, setShowFields] = React.useState(false);
+  const [dish, setDish] = useState('');
+  const [openDish, setOpenDish] = useState(false);
+  const [number, setNumber] = useState('');
+  const [showFields, setShowFields] = useState(false);
+  const { data, setData } = props;
 
   const handleChangeDish = (event) => {
-    setDish(event.target.value);
+	setDish(event.target.value);
+	const value = MENU.filter((item) => item.value === event.target.value)[0].name;
+    setData({...data, dish: {...data.dish, value: value}})
   };
 
   const handleCloseDish = () => {
@@ -44,8 +47,13 @@ export default function SelectDishes() {
   };
 
   const handleChangeNumber = (event) => {
-    setNumber(event.target.value);
+	setNumber(event.target.value);
+	setData({...data, dish: {...data.dish, number: event.target.value}})
   };
+
+  useEffect(() => {
+      
+  }, []);
 
   return (
     <div>
@@ -106,11 +114,14 @@ export default function SelectDishes() {
 				</div>
 			)
 		}
-	  <div className="block-warning">
-		  <p className="text-danger">
-		  	The total number of dishes should be greater or equal to the number of person and a maximum of 10 is allowed. So should be 5 ~ 10.
-		  </p>
-	  </div>
+		{ number < 6 ? (
+			<div className="block-warning">
+				<p className="text-danger">
+					The total number of dishes should be greater or equal to the number of person and a maximum of 10 is allowed. So should be 5 ~ 10.
+				</p>
+	  		</div>
+		) : null}
+	  
     </div>
   );
 }

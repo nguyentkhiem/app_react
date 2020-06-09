@@ -15,8 +15,8 @@ export default () => (
   <BrowserRouter>
     <I18nextProvider i18n={i18n}>
       <Switch>
-        <Admin exact path={['/', '/home', '/admin', '/dashboard']} component={Home} />
-        <Admin path='/simple-order-system' component={SimpleOrderSystem} />
+        <Admin exact path={['/dashboard']} component={Home} />
+        <Admin path={['/', '/simple-order-system']} component={SimpleOrderSystem} />
         <Basic component={Default} />
       </Switch>
     </I18nextProvider>

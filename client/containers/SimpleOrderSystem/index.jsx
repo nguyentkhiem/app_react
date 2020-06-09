@@ -35,37 +35,53 @@ function getSteps() {
 const objectDefine = {
   meal: {
     value: null,
-    number: 0,
+    number: 1,
   },
   restaurant: {
-    value: null
+    value: null,
   },
   dish: {
     value: null,
-    number: 0
+    number: 1
   }
 }
 
-function getStepContent(stepIndex) {
+function getStepContent(stepIndex, data, setData) {
   switch (stepIndex) {
     case 0:
-      return <SelectMeal />;
+      return <SelectMeal 
+          data={data}
+          setData={setData}
+      />;
     case 1:
-      return <SelectRestaurant />;
+      return <SelectRestaurant 
+        data={data}
+        setData={setData}
+      />;
     case 2:
-      return <SelectDishes />;
+      return <SelectDishes 
+        data={data}
+        setData={setData}
+      />;
     case 3:
-      return <Review />;
+      return <Review 
+        data={data}
+        setData={setData}
+      />;
     default:
-      return <SelectMeal />;
+      return <SelectMeal 
+        data={data}
+        setData={setData}
+      />;
   }
 }
 
 export default function SimpleOrderSystem() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [data, setData] = useState(objectDefine);
 
   const handleNext = () => {
     if (activeStep < 3) {
@@ -103,7 +119,7 @@ export default function SimpleOrderSystem() {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <Typography className={classes.instructions}>{getStepContent(activeStep, data, setData)}</Typography>
             <div>
               <Button
                 disabled={activeStep === 0}
