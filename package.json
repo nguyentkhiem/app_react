@@ -15,7 +15,7 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "build": "rm -fr ./public/* && webpack --mode production -p --progress",
+    "build": "rm -fr ./build/* && webpack --mode production -p --progress",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"

@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 
-const outputDirectory = 'public';
+const outputDirectory = 'build';
 
 var babelrc = fs.readFileSync('./.babelrc');
 var babelrcObject = {};
