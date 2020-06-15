@@ -3,6 +3,7 @@
   "description": "app-react",
   "version": "0.1.0",
   "main": "server",
+  "homepage": "https://nguyentkhiem.github.io/app_react/",
   "author": {
     "name": "khiemnt",
     "email": "khiemnt@fabbi.com"
@@ -15,12 +16,15 @@
   },
   "scripts": {
     "build": "rm -fr ./public/* && webpack --mode production -p --progress",
-    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot"
+    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "autoprefixer": "^9.6.4",
     "bootstrap": "^4.5.0",
+    "gh-pages": "^3.0.0",
     "i18next": "^15.0.9",
     "immer": "^6.0.9",
     "react": "^16.10.2",
