@@ -26,7 +26,7 @@
     "bootstrap": "^4.5.0",
     "gh-pages": "^3.0.0",
     "i18next": "^15.0.9",
-    "immer": "^6.0.9",
+    "immer": "^9.0.6",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.10.2",
